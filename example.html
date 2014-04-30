@@ -1,0 +1,88 @@
+<html>
+
+    <head>
+    
+        <style>
+        
+        
+            ul,li{
+                list-style-type: none;
+                margin:0;
+                padding:0;
+            }
+            
+            .mg-stringSet>li{
+                display: inline-block;
+            }
+            
+            .mg-stringSet>li:before{
+                content:attr(mg-string-key);
+                display:iniline-block;
+                padding:3px;
+            }   
+            
+            .mg-string>li:first-child{
+                border-top: 1px solid #606060;
+            }
+            
+            .mg-string>li{
+                border-bottom: 1px solid #606060;
+                border-left: 1px solid #606060;
+                padding:3px;
+            }
+            
+            .mg-string>li:hover{
+                background:#b2d8f9;
+                cursor: pointer;
+            }   
+            
+            .mg-stringSet>li:last-child>.mg-string>li{
+                border-right: 1px solid #606060;
+            }
+            
+        </style>
+        
+        <script src="./jquery.js"></script>
+        <script src="./lib.js"></script>
+    
+    
+        <script>
+            
+            
+            
+            $(function(){
+                
+                var mySet = new GuitarMate.StringSet();
+                mySet.addString(new GuitarMate.String(GuitarMate.Key.E,1));
+                mySet.addString(new GuitarMate.String(GuitarMate.Key.A,1));
+                mySet.addString(new GuitarMate.String(GuitarMate.Key.D,1));
+                mySet.addString(new GuitarMate.String(GuitarMate.Key.G,2));
+                mySet.addString(new GuitarMate.String(GuitarMate.Key.B,2));
+                mySet.addString(new GuitarMate.String(GuitarMate.Key.E,3));
+                
+                var $htmlGuitare = mySet.renderHtml();
+                
+                $htmlGuitare.appendTo($("body"));
+                
+                var dadgad = new GuitarMate.StringSet();
+                dadgad.addString(new GuitarMate.String(GuitarMate.Key.D,1));
+                dadgad.addString(new GuitarMate.String(GuitarMate.Key.A,1));
+                dadgad.addString(new GuitarMate.String(GuitarMate.Key.D,2));
+                dadgad.addString(new GuitarMate.String(GuitarMate.Key.G,2));
+                dadgad.addString(new GuitarMate.String(GuitarMate.Key.A,2));
+                dadgad.addString(new GuitarMate.String(GuitarMate.Key.D,3));
+                
+                var $htmlGuitare = dadgad.renderHtml();
+                
+                $htmlGuitare.appendTo($("body"));
+            });
+        </script>
+    </head>
+    
+    <body>
+        
+        
+        
+    </body>
+
+</html>
