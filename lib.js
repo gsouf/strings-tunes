@@ -25,6 +25,7 @@ var GuitarMate = (function(){
                         
                         var $ul = $("<ul/>");
                         $ul.addClass("mg-string");
+                        $ul.data("mg-string",this);
                         
                         while(drawn < numberToDraw){
                             var ivalIndex = myKeyIndex - baseKeyIndex + drawn;
@@ -37,7 +38,17 @@ var GuitarMate = (function(){
                             var $li = $("<li/>");
                             $li.data("mg-ival",o.Ival.order[ivalAjustedIndex]);
                             $li.data("mg-key",o.Key.order[ivalAjustedIndex]);
-                            $li.html(o.Ival.order[ivalAjustedIndex].name);
+                            
+                            var $span = $("<span/>");
+                            $span.addClass("mg-music-note");
+                            $span.html(o.Ival.order[ivalAjustedIndex].name);
+                            
+                            $li.html($span);
+                            
+                            for(var i in o.Ival.order[ivalAjustedIndex].gammes){
+                            	$li.addClass("mg-gamme-" + o.Ival.order[ivalAjustedIndex].gammes[i]);
+                            }
+                            $li.addClass("mg-ival-" + o.Ival.order[ivalAjustedIndex].className );
                             
                             $ul.append($li);
                             
@@ -49,22 +60,36 @@ var GuitarMate = (function(){
                     }
                 };
                 
-                o.Ival = function(name){
+                o.Ival = function(name,className,gammes){
                     this.name = name;
+                    this.gammes = gammes;
+                    this.className = className;
                 };
                 
-                o.Ival.Tonic = new o.Ival("1");
-                o.Ival.SecondMinor = new o.Ival("2-");
-                o.Ival.Second = new o.Ival("2");
-                o.Ival.TierceMinor = new o.Ival("3-");
-                o.Ival.Tierce = new o.Ival("3");
-                o.Ival.Quart = new o.Ival("4");
-                o.Ival.QuintMinor = new o.Ival("5-");
-                o.Ival.Quint = new o.Ival("5");
-                o.Ival.SixthMinor = new o.Ival("6-");
-                o.Ival.Sixth = new o.Ival("6");
-                o.Ival.SeventhMinor = new o.Ival("7-");
-                o.Ival.Seventh = new o.Ival("7");
+                o.Ival.Tonic = new o.Ival(
+                	"F","tonic",["major","pentatonic-minor","pentatonic-major","arpeggio-minor"]);
+                o.Ival.SecondMinor = new o.Ival(
+                	"2-","",[]);
+                o.Ival.Second = new o.Ival(
+                	"2","",["major","pentatonic-major"]);
+                o.Ival.TierceMinor = new o.Ival(
+                	"3-","",["pentatonic-minor","pentatonic-major-blue-note","arpeggio-minor"]);
+                o.Ival.Tierce = new o.Ival(
+                	"3","",["major","pentatonic-major"]);
+                o.Ival.Quart = new o.Ival(
+                	"4","",["major","pentatonic-minor"]);
+                o.Ival.QuintMinor = new o.Ival(
+                	"5-","",["pentatonic-minor-blue-note"]);
+                o.Ival.Quint = new o.Ival(
+                	"5","",["major","pentatonic-minor","pentatonic-major","arpeggio-minor"]);
+                o.Ival.SixthMinor = new o.Ival(
+                	"6-","",[]);
+                o.Ival.Sixth = new o.Ival(
+                	"6","",["major","pentatonic-major"]);
+                o.Ival.SeventhMinor = new o.Ival(
+                	"7-","",["pentatonic-minor"]);
+                o.Ival.Seventh = new o.Ival(
+                	"7","",["major","pentatonic-major"]);
                 
                 o.Ival.order = [
                     o.Ival.Tonic,

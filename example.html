@@ -11,38 +11,116 @@
                 padding:0;
             }
             
+           
             .mg-stringSet>li{
                 display: inline-block;
             }
             
             .mg-stringSet>li:before{
+            	font-family:arial;
                 content:attr(mg-string-key);
-                display:iniline-block;
+                display:inline-block;
                 padding:3px;
+                width:100%;
+                text-align:center;
             }   
             
-            .mg-string>li:first-child{
-                border-top: 1px solid #606060;
+            .mg-stringSet>li>ul{
+            	position:relative;	
+            }
+            
+            .mg-string:before{
+           		content:"";
+           		display:block;
+           		position:absolute;
+           		top:0;
+           		bottom:0;
+           		left:50%;
+           		width:1px;
+           		background:#555;
+            }
+            
+            .mg-string{
+            	border-top:2px solid #333;	
             }
             
             .mg-string>li{
-                border-bottom: 1px solid #606060;
-                border-left: 1px solid #606060;
-                padding:3px;
+            	height:15px;
+            	width:15px;
+            	position:relative;
+            	padding:4px 4px 6px 4px;
+            	border-bottom:1px solid #888;
+            	overflow:visible;
+            }
+            
+            .mg-string>li>.mg-music-note{
+            	display:block;
+            	height:100%;
+            	width:100%;
+            	border-radius:10px;
+            	border:1px solid #DDD;
+            	
+            	font-size:10px;
+            	font-weight:bold;
+            	color:white;
+            	text-align:center;
+            	font-family:arial;
+            	padding-top:4px;
+            	padding-left:2px;
+            	padding-right:2px;
+            	
+            	margin-top:-2px;
+            	margin-left:-2px;
+            	
+            	background:#444;
             }
             
             .mg-string>li:hover{
-                background:#b2d8f9;
-                cursor: pointer;
+                
             }   
             
             .mg-stringSet>li:last-child>.mg-string>li{
-                border-right: 1px solid #606060;
+                
             }
+            
+            .mg-stringSet .mg-ival-tonic .mg-music-note{
+            	-moz-box-shadow: 0px 0px 0px 1px #343434;
+-webkit-box-shadow: 0px 0px 0px 1px #343434;
+-o-box-shadow: 0px 0px 0px 1px #343434;
+box-shadow: 0px 0px 0px 1px #343434;
+filter:progid:DXImageTransform.Microsoft.Shadow(color=#343434, Direction=NaN, Strength=0);
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+				background:#000 !important;
+            }
+            
+            .mg-stringSet.mg-show-arpeggio-minor .mg-music-note,
+            .mg-stringSet.mg-show-major .mg-music-note,
+            .mg-stringSet.mg-show-pentatonic-major .mg-music-note,
+            .mg-stringSet.mg-show-pentatonic-minor .mg-music-note{
+            	opacity:0.6;	
+            }
+            
+            .mg-stringSet.mg-show-major .mg-gamme-major>span,
+            .mg-stringSet.mg-show-arpeggio-minor .mg-gamme-arpeggio-minor>span,
+            .mg-stringSet.mg-show-pentatonic-major .mg-gamme-pentatonic-major>.mg-music-note,
+            .mg-stringSet.mg-show-pentatonic-minor .mg-gamme-pentatonic-minor>.mg-music-note{
+            	opacity:1;
+            	background:#af4646;
+            }
+            
+            .mg-stringSet.mg-show-pentatonic-major .mg-gamme-pentatonic-major-blue-note .mg-music-note,
+            .mg-stringSet.mg-show-pentatonic-minor .mg-gamme-pentatonic-minor-blue-note .mg-music-note{
+            	background:#2E5499;
+            	opacity:1;
+            }
+            
+            
+            
             
         </style>
         
-        <script src="./jquery.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="./lib.js"></script>
     
     
@@ -63,6 +141,8 @@
                 var $htmlGuitare = mySet.renderHtml();
                 
                 $htmlGuitare.appendTo($("body"));
+                
+                $htmlGuitare.addClass("mg-show-arpeggio-minor");
                 
                 var dadgad = new GuitarMate.StringSet();
                 dadgad.addString(new GuitarMate.String(GuitarMate.Key.D,1));
