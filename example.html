@@ -130,7 +130,7 @@ filter:progid:DXImageTransform.Microsoft.Shadow(color=#343434, Direction=NaN, St
             
             $(function(){
                 
-                var mySet = new GuitarMate.StringSet();
+                var mySet = new GuitarMate.StringSet(GuitarMate.MajorSystem);
                 mySet.addString(new GuitarMate.String(GuitarMate.Key.E,1));
                 mySet.addString(new GuitarMate.String(GuitarMate.Key.A,1));
                 mySet.addString(new GuitarMate.String(GuitarMate.Key.D,1));
@@ -140,11 +140,10 @@ filter:progid:DXImageTransform.Microsoft.Shadow(color=#343434, Direction=NaN, St
                 
                 var $htmlGuitare = mySet.renderHtml();
                 
-                $htmlGuitare.appendTo($("body"));
+                $htmlGuitare.appendTo($("#item-wrapper")).css({"display":"inline-block","margin-right":"40"});
                 
-                $htmlGuitare.addClass("mg-show-arpeggio-minor");
-                
-                var dadgad = new GuitarMate.StringSet();
+
+                var dadgad = new GuitarMate.StringSet(GuitarMate.MajorSystem);
                 dadgad.addString(new GuitarMate.String(GuitarMate.Key.D,1));
                 dadgad.addString(new GuitarMate.String(GuitarMate.Key.A,1));
                 dadgad.addString(new GuitarMate.String(GuitarMate.Key.D,2));
@@ -152,16 +151,35 @@ filter:progid:DXImageTransform.Microsoft.Shadow(color=#343434, Direction=NaN, St
                 dadgad.addString(new GuitarMate.String(GuitarMate.Key.A,2));
                 dadgad.addString(new GuitarMate.String(GuitarMate.Key.D,3));
                 
-                var $htmlGuitare = dadgad.renderHtml();
+                var $htmlGuitare2 = dadgad.renderHtml();
                 
-                $htmlGuitare.appendTo($("body"));
+                $htmlGuitare2.appendTo($("#item-wrapper")).css("display","inline-block");
+                
+                
+                $("#game-selector").change(function(){
+                	$htmlGuitare2.add($htmlGuitare).removeClass().addClass("mg-stringSet").addClass($(this).val());
+                });
+                
             });
         </script>
     </head>
     
     <body>
+        <div style="width:120px;margin:auto;">
+        <select id="game-selector">
+        	<option>Select a view</option>
+            <option value="mg-show-major">Major Scale</option>
+            <option value="mg-show-arpeggio-minor">Arpeggio minor</option>
+            <option value="mg-show-pentatonic-major">Pentatonic Majeur</option>
+            <option value="mg-show-pentatonic-minor">Pentatonic Minor</option>
+            <option value="mg-show-pentatonic-major">Pentatonic Major</option>
+        </select>
+        </div>
         
         
+        <div id="item-wrapper" style="text-align:center;">
+        
+        </div>
         
     </body>
 
